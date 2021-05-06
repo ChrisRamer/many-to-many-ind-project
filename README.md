@@ -1,6 +1,6 @@
-# *XXXXX-ProjectName*
+# *Dr. Sillystringz's Factory*
 
-#### *XXXXX-ProjectName, XXXXX-SubmissionDate*
+#### *Dr. Sillystringz's Factory, XXXXX-SubmissionDate*
 
 #### By **Chris Ramer**
 
