@@ -61,5 +61,20 @@ namespace Factory.Controllers
 			_db.SaveChanges();
 			return RedirectToAction("Details", new { id = engineer.EngineerId });
 		}
+
+		public ActionResult  Delete(int id)
+		{
+			Engineer thisEngineer = GetEngineerFromId(id);
+			return View(thisEngineer);
+		}
+
+		[HttpPost, ActionName("Delete")]
+		public ActionResult DeleteConfirmed(int id)
+		{
+			Engineer thisEngineer = GetEngineerFromId(id);
+			_db.Engineers.Remove(thisEngineer);
+			_db.SaveChanges();
+			return RedirectToAction("Index");
+		}
 	}
 }
