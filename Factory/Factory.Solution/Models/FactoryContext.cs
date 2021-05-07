@@ -4,8 +4,9 @@ namespace Factory.Models
 {
 	public class FactoryContext : DbContext
 	{
-		//public virtual DbSet<FactoryContext> XXXXX-Model1Name { get; set; }
-		//public virtual DbSet<FactoryContext> XXXXX-Model2Name { get; set; }
+		public virtual DbSet<Engineer> Engineers { get; set; }
+		public virtual DbSet<Machine> Machines { get; set; }
+		public virtual DbSet<EngineerMachine> EngineerMachines { get; set; }
 
 		public FactoryContext(DbContextOptions options) : base(options) { }
 
