@@ -1,0 +1,30 @@
+@{
+	Layout = "_Layout";
+}
+
+@model Factory.Models.Machine
+
+<h2 id="title">Add a new Machine</h2>
+
+<hr />
+
+@using (Html.BeginForm())
+{
+	@Html.LabelFor(model => model.Name)
+	<br>
+	@Html.TextBoxFor(model => model.Name)
+	<br><br>
+	@Html.Label("Engineer")
+	<br>
+	@Html.DropDownList("EngineerId")
+	<br><br>
+	<input type="submit" value="Add machine" />
+}
+
+<hr />
+
+<p>
+	@Html.ActionLink("View all machines", "Index")
+ |
+	@Html.ActionLink("Go to homepage", "Index", "Home")
+</p>
