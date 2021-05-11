@@ -46,5 +46,11 @@ namespace Factory.Controllers
 			_db.SaveChanges();
 			return RedirectToAction("Index");
 		}
+
+		public ActionResult Details(int id)
+		{
+			Machine thisMachine = GetMachineFromId(id);
+			return View(thisMachine);
+		}
 	}
 }
