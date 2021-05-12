@@ -63,7 +63,7 @@ namespace Factory.Controllers
 		[HttpPost]
 		public ActionResult Edit(Machine machine, int engineerId)
 		{
-			bool duplicate = _db.EngineerMachines.Any(engineerMachine => engineerMachine.EngineerId == engineerId && engineerMachine.MachineId == machine.MachineId);
+			bool duplicate = _db.EngineerMachines.Any(join => join.EngineerId == engineerId && join.MachineId == machine.MachineId);
 
 			if (engineerId != 0 && !duplicate)
 			{
@@ -71,6 +71,27 @@ namespace Factory.Controllers
 			}
 
 			_db.Entry(machine).State = EntityState.Modified;
+			_db.SaveChanges();
+			return RedirectToAction("Details", new { id = machine.MachineId });
+		}
+
+		public ActionResult AddEngineer(int id)
+		{
+			Machine thisMachine = GetMachineFromId(id);
+			ViewBag.EngineerId = new SelectList(_db.Engineers, "EngineerId", "Name");
+			return View(thisMachine);
+		}
+
+		[HttpPost]
+		public ActionResult AddEngineer(Machine machine, int engineerId)
+		{
+			bool duplicate = _db.EngineerMachines.Any(join => join.EngineerId == engineerId && join.MachineId == machine.MachineId);
+
+			if (engineerId != 0 && !duplicate)
+			{
+				_db.EngineerMachines.Add(new EngineerMachine() { EngineerId = engineerId, MachineId = machine.MachineId });
+			}
+
 			_db.SaveChanges();
 			return RedirectToAction("Details", new { id = machine.MachineId });
 		}

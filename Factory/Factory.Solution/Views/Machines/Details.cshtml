@@ -33,6 +33,8 @@ else
 <p>
 	@Html.ActionLink("Edit", "Edit", new { id = Model.MachineId })
 	|
+	@Html.ActionLink("Add an engineer", "AddEngineer", new { id = Model.MachineId })
+	|
 	@Html.ActionLink("Delete", "Delete", new { id = Model.MachineId })
 	|
 	@Html.ActionLink("View all machines", "index")
