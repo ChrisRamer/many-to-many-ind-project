@@ -75,6 +75,21 @@ namespace Factory.Controllers
 			return RedirectToAction("Details", new { id = machine.MachineId });
 		}
 
+		public ActionResult Delete(int id)
+		{
+			Machine thisMachine = GetMachineFromId(id);
+			return View(thisMachine);
+		}
+
+		[HttpPost, ActionName("Delete")]
+		public ActionResult DeleteConfirmed(int id)
+		{
+			Machine thisMachine = GetMachineFromId(id);
+			_db.Machines.Remove(thisMachine);
+			_db.SaveChanges();
+			return RedirectToAction("Index");
+		}
+
 		public ActionResult AddEngineer(int id)
 		{
 			Machine thisMachine = GetMachineFromId(id);
