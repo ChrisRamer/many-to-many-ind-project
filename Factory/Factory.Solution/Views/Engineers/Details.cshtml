@@ -17,7 +17,14 @@ else
 	<ul>
 		@foreach (var join in Model.Machines)
 		{
-		 <li>@Html.ActionLink($"{join.Machine.Name}", "Details", "Machines", new { id = join.Machine.MachineId })</li>
+			<li class="inline">
+				@using (Html.BeginForm("DeleteMachine", "Engineers"))
+				{
+						@Html.ActionLink($"{join.Machine.Name}", "Details", "Machines", new { id = join.Machine.MachineId })
+						@Html.Hidden("joinId", @join.EngineerMachineId)
+						<input id="delete" type="submit" value="Delete" />
+				}
+			</li>
 		}
 	</ul>
 }
@@ -25,11 +32,13 @@ else
 <hr />
 
 <p>
+	@Html.ActionLink("Add machine", "AddMachine", new { id = Model.EngineerId })
+	|
 	@Html.ActionLink("Edit", "Edit", new { id = Model.EngineerId })
- |
+	|
 	@Html.ActionLink("Delete", "Delete", new { id = Model.EngineerId })
- |
+	<br>
 	@Html.ActionLink("View all engineers", "index")
- |
+	|
 	@Html.ActionLink("Go to homepage", "Index", "Home")
 </p>

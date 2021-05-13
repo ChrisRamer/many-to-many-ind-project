@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -75,6 +76,36 @@ namespace Factory.Controllers
 			_db.Engineers.Remove(thisEngineer);
 			_db.SaveChanges();
 			return RedirectToAction("Index");
+		}
+
+		public ActionResult AddMachine(int id)
+		{
+			Engineer thisEngineer = GetEngineerFromId(id);
+			ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "Name");
+			return View(thisEngineer);
+		}
+
+		[HttpPost]
+		public ActionResult AddMachine(Engineer engineer, int machineId)
+		{
+			bool duplicate = _db.EngineerMachines.Any(join => join.EngineerId == engineer.EngineerId && join.MachineId == machineId);
+
+			if (machineId != 0 && !duplicate)
+			{
+				_db.EngineerMachines.Add(new EngineerMachine() { EngineerId = engineer.EngineerId, MachineId = machineId});
+			}
+
+			_db.SaveChanges();
+			return RedirectToAction("Details", new { id = engineer.EngineerId });
+		}
+
+		[HttpPost]
+		public ActionResult DeleteMachine(int joinId)
+		{
+			EngineerMachine joinEntry = _db.EngineerMachines.FirstOrDefault(entry => entry.EngineerMachineId == joinId);
+			_db.EngineerMachines.Remove(joinEntry);
+			_db.SaveChanges();
+			return RedirectToAction("Details", new { id = joinEntry.EngineerId });
 		}
 	}
 }
