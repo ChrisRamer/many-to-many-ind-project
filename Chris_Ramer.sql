@@ -72,7 +72,6 @@ DROP TABLE IF EXISTS `machines`;
 CREATE TABLE `machines` (
   `MachineId` int NOT NULL AUTO_INCREMENT,
   `Name` longtext,
-  `EngineerId` int NOT NULL,
   PRIMARY KEY (`MachineId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -86,4 +85,4 @@ CREATE TABLE `machines` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-13 11:08:06
+-- Dump completed on 2021-05-14  9:55:13
